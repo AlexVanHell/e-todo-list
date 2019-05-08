@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="authentication-container m-5">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Registro</h2>
+        <div class="row">
+          <div class="col-12">
+            <div class="alert alert-warning" role="alert" *ngIf="formError">
+              {{ formError }}
+            </div>
+          </div>
+        </div>
+
+        <form class="row" [formGroup]="signupForm">
+          <div class="form-group col-12">
+            <label for="loginEmail">Correo Electrónico</label>
+            <input
+              type="email"
+              class="form-control"
+              id="loginEmail"
+              placeholder="Correo Electrónico"
+              [formControlName]="'email'"
+            />
+            <small
+              class="form-text text-danger"
+              *ngIf="signupForm.get('email').hasError('email')"
+            >
+              Introduce un correo electronico válido.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="
+                signupForm.get('email').hasError('required') && submittedForm
+              "
+              >Este campo es requerido.</small
+            >
+          </div>
+          <div class="form-group col-12">
+            <label for="loginUsername">Nombre de usuario</label>
+            <input
+              type="text"
+              class="form-control"
+              id="loginUsername"
+              placeholder="Nombre de usuario"
+              [formControlName]="'username'"
+            />
+            <small
+              class="form-text text-danger"
+              *ngIf="
+                signupForm.get('username').hasError('required') && submittedForm
+              "
+            >
+              Este campo es requerido.
+            </small>
+          </div>
+          <div class="form-group col-12">
+            <label for="loginFirstName">Nombre(s)</label>
+            <input
+              type="text"
+              class="form-control"
+              id="loginFirstName"
+              placeholder="Nombre(s)"
+              [formControlName]="'firstName'"
+            />
+            <small
+              class="form-text text-danger"
+              *ngIf="
+                signupForm.get('firstName').hasError('required') &&
+                submittedForm
+              "
+            >
+              Este campo es requerido.
+            </small>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label for="loginLastName">Apellido paterno</label>
+            <input
+              type="text"
+              class="form-control"
+              id="loginLastName"
+              placeholder="Apellido paterno"
+              [formControlName]="'lastName'"
+            />
+            <small
+              class="form-text text-danger"
+              *ngIf="
+                signupForm.get('lastName').hasError('required') && submittedForm
+              "
+            >
+              Este campo es requerido.
+            </small>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label for="loginSecondLastName">Apellido materno</label>
+            <input
+              type="text"
+              class="form-control"
+              id="loginSecondLastName"
+              placeholder="Apellido materno"
+              [formControlName]="'secondLastName'"
+            />
+            <small
+              class="form-text text-danger"
+              *ngIf="
+                signupForm.get('secondLastName').hasError('required') &&
+                submittedForm
+              "
+            >
+              Este campo es requerido.
+            </small>
+          </div>
+          <ng-container [formGroupName]="'passwords'">
+            <div class="form-group col-12">
+              <label for="loginPassword">Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="loginPassword"
+                placeholder="Contraseña"
+                [formControlName]="'password'"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="
+                  signupForm.get('passwords.password').hasError('required') &&
+                  submittedForm
+                "
+              >
+                Este campo es requerido.
+              </small>
+            </div>
+            <div class="form-group col-12">
+              <label for="loginPasswordConfirm">Confirmar Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="loginPasswordConfirm"
+                placeholder="Confirmar Contraseña"
+                [formControlName]="'confirm'"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="
+                  signupForm.get('passwords.confirm').hasError('required') &&
+                  submittedForm
+                "
+              >
+                Este campo es requerido.
+              </small>
+              <small
+                class="form-text text-danger"
+                *ngIf="signupForm.get('passwords').hasError('notSame')"
+              >
+                Las contraseñas no coinciden
+              </small>
+            </div>
+          </ng-container>
+
+          <div class="col-12 text-center pt-3">
+            <button class="btn btn-primary" (click)="submit()">Aceptar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
