@@ -5,6 +5,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { SharedModule } from '../../shared/shared.module';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -12,7 +15,9 @@ import { SignupComponent } from './pages/signup/signup.component';
     CommonModule,
     AuthenticationRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule,
+    SharedModule
   ]
 })
 export class AuthenticationModule { }

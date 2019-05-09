@@ -10,6 +10,10 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   formError: string = '';
   submittedForm: boolean = false;
+  passwordsPreviews = {
+    psw: true,
+    confirm: true
+  }
 
   constructor(
     private fb: FormBuilder
@@ -55,6 +59,10 @@ export class SignupComponent implements OnInit {
     }
 
     alert(this.signupForm.value.email);
+  }
+
+  toggleField(key: string): void {
+    this.passwordsPreviews[key] = !this.passwordsPreviews[key];
   }
 
 }

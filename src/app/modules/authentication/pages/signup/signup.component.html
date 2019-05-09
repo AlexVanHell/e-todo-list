@@ -110,10 +110,16 @@
             </small>
           </div>
           <ng-container [formGroupName]="'passwords'">
-            <div class="form-group col-12">
+            <div class="form-group col-12 form-group-icon-field">
+              <span class="form-group-icon">
+                <fa-icon
+                  [icon]="passwordsPreviews.psw ? 'eye' : 'eye-slash'"
+                  (click)="toggleField('psw')"
+                ></fa-icon>
+              </span>
               <label for="loginPassword">Contraseña</label>
               <input
-                type="password"
+                [type]="passwordsPreviews.psw ? 'password' : 'text'"
                 class="form-control"
                 id="loginPassword"
                 placeholder="Contraseña"
@@ -129,15 +135,22 @@
                 Este campo es requerido.
               </small>
             </div>
-            <div class="form-group col-12">
+            <div class="form-group col-12 form-group-icon-field">
               <label for="loginPasswordConfirm">Confirmar Contraseña</label>
-              <input
-                type="password"
-                class="form-control"
-                id="loginPasswordConfirm"
-                placeholder="Confirmar Contraseña"
-                [formControlName]="'confirm'"
-              />
+              <app-password-preview>
+                <span class="form-group-icon" appPasswordPreview>
+                  <fa-icon icon="eye"></fa-icon>
+                </span>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginPasswordConfirm"
+                  placeholder="Confirmar Contraseña"
+                  [formControlName]="'confirm'"
+                  #input
+                />
+              </app-password-preview>
+
               <small
                 class="form-text text-danger"
                 *ngIf="

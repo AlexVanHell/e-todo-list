@@ -3,3 +3,19 @@
 .authentication-container {
 
 }
+
+.form-group-icon-field {
+	position: relative;
+
+	.form-group-icon {
+		position: absolute;
+		top: 39px;
+		right: 28px;
+		z-index: 2;
+
+		&.no-label {
+			top: initial;
+			bottom: 7px;
+		}
+	}
+}
