@@ -12,15 +12,32 @@
         </div>
 
         <form class="row" [formGroup]="signupForm">
-          <div class="form-group col-12">
+          <div class="form-group col-12 form-group-icon-field">
             <label for="loginEmail">Correo Electrónico</label>
+            <span class="form-group-icon">
+              <fa-icon
+                icon="times"
+                class="text-danger"
+                *ngIf="signupForm.get('email').hasError('emailExists')"
+              ></fa-icon>
+              <fa-icon
+                icon="check"
+                class="text-success"
+                *ngIf="signupForm.get('email').status === 'VALID'"
+              ></fa-icon>
+              <fa-icon
+                icon="spinner"
+                class="text-info"
+                [spin]="true"
+                *ngIf="signupForm.get('email').status === 'PENDING'"
+              ></fa-icon>
+            </span>
             <input
               type="email"
               class="form-control"
               id="loginEmail"
               placeholder="Correo Electrónico"
               [formControlName]="'email'"
-              (change)="checkAvailableEmail()"
             />
             <small
               class="form-text text-danger"
@@ -36,8 +53,26 @@
               >Este campo es requerido.</small
             >
           </div>
-          <div class="form-group col-12">
+          <div class="form-group col-12 form-group-icon-field">
             <label for="loginUsername">Nombre de usuario</label>
+            <span class="form-group-icon">
+              <fa-icon
+                icon="times"
+                class="text-danger"
+                *ngIf="signupForm.get('username').hasError('usernameExists')"
+              ></fa-icon>
+              <fa-icon
+                icon="check"
+                class="text-success"
+                *ngIf="signupForm.get('username').status === 'VALID'"
+              ></fa-icon>
+              <fa-icon
+                icon="spinner"
+                class="text-info"
+                [spin]="true"
+                *ngIf="signupForm.get('username').status === 'PENDING'"
+              ></fa-icon>
+            </span>
             <input
               type="text"
               class="form-control"

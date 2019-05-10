@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AsyncValidatorFn, AbstractControl } from '@angular/forms';
 import { AuthenticationService } from '../../../../core/http/authentication/authentication.service';
+
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +21,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,8 +31,8 @@ export class SignupComponent implements OnInit {
 
   buildForm(): void {
     this.signupForm = this.fb.group({
-      email: ['', [Validators.email, Validators.required]],
-      username: ['', [Validators.required]],
+      email: ['', [Validators.email, Validators.required], this.checkAvailableEmail()],
+      username: ['', [Validators.required], this.checkAvailableUsername()],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       secondLastName: ['', [Validators.required]],
@@ -60,20 +64,46 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    alert(this.signupForm.value.email);
+    const user: any = Object.assign({}, this.signupForm.value);
+
+    user.password = user.passwords.password;
+    delete user.passwords;
+
+    this.authenticationService.signup(user)
+      .subscribe(res => {
+        console.log('Se registro el vato');
+        this.router.navigate(['/login']);
+      }, err => {
+        console.log(err);
+        this.formError = 'Hubo un error';
+      });
+
   }
 
   toggleField(key: string): void {
     this.passwordsPreviews[key] = !this.passwordsPreviews[key];
   }
 
-  checkAvailableEmail(): void {
-    const mail: string = this.signupForm.get('email').value;
+  checkAvailableEmail(): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      return this.authenticationService.checkAvailableEmail(control.value)
+        .pipe(
+          map((res: any) => {
+            return res.email ? { emailExists: true } : null;
+          })
+        )
+    }
+  }
 
-    this.authenticationService.checkAvailableEmail(mail)
-      .subscribe(value => {
-        console.log(value);
-      });
+  checkAvailableUsername(): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      return this.authenticationService.checkAvailableUsername(control.value)
+        .pipe(
+          map((res: any) => {
+            return res.username ? { usernameExists: true } : null;
+          })
+        )
+    }
   }
 
 }
