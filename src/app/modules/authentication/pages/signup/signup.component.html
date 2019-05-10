@@ -20,6 +20,7 @@
               id="loginEmail"
               placeholder="Correo Electrónico"
               [formControlName]="'email'"
+              (change)="checkAvailableEmail()"
             />
             <small
               class="form-text text-danger"

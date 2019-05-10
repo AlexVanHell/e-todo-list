@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../../../core/http/authentication/authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,8 @@ export class SignupComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -63,6 +65,15 @@ export class SignupComponent implements OnInit {
 
   toggleField(key: string): void {
     this.passwordsPreviews[key] = !this.passwordsPreviews[key];
+  }
+
+  checkAvailableEmail(): void {
+    const mail: string = this.signupForm.get('email').value;
+
+    this.authenticationService.checkAvailableEmail(mail)
+      .subscribe(value => {
+        console.log(value);
+      });
   }
 
 }

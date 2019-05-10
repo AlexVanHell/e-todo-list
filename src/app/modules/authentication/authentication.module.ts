@@ -8,6 +8,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { SharedModule } from '../../shared/shared.module';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthenticationService } from '../../core/http/authentication/authentication.service';
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -18,6 +19,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     FontAwesomeModule,
     SharedModule
+  ],
+  providers: [
+    AuthenticationService
   ]
 })
 export class AuthenticationModule { }

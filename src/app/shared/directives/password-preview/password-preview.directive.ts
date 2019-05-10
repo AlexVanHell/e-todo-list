@@ -9,7 +9,7 @@ export class PasswordPreviewDirective implements OnInit {
   clickEmitter: Subject<any>;
 
   constructor() {
-    this.clickEmitter = new Subject;
+    this.clickEmitter = new Subject();
   }
 
   ngOnInit() {
