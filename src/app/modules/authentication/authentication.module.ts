@@ -8,7 +8,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { SharedModule } from '../../shared/shared.module';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AuthenticationService } from '../../core/http/authentication/authentication.service';
+import { AuthenticationHttpService } from '../../core/http/authentication/authentication-http.service';
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -21,7 +21,7 @@ import { AuthenticationService } from '../../core/http/authentication/authentica
     SharedModule
   ],
   providers: [
-    AuthenticationService
+    AuthenticationHttpService
   ]
 })
 export class AuthenticationModule { }

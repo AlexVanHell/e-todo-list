@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AsyncValidatorFn, AbstractControl } from '@angular/forms';
-import { AuthenticationService } from '../../../../core/http/authentication/authentication.service';
 
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthenticationHttpService } from '../../../../core/http/authentication/authentication-http.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService,
+    private authenticationHttpService: AuthenticationHttpService,
     private router: Router
   ) { }
 
@@ -69,7 +69,7 @@ export class SignupComponent implements OnInit {
     user.password = user.passwords.password;
     delete user.passwords;
 
-    this.authenticationService.signup(user)
+    this.authenticationHttpService.signup(user)
       .subscribe(res => {
         console.log('Se registro el vato');
         this.router.navigate(['/login']);
@@ -86,7 +86,7 @@ export class SignupComponent implements OnInit {
 
   checkAvailableEmail(): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      return this.authenticationService.checkAvailableEmail(control.value)
+      return this.authenticationHttpService.checkAvailableEmail(control.value)
         .pipe(
           map(res => {
             return res.email ? { emailExists: true } : null;
@@ -97,7 +97,7 @@ export class SignupComponent implements OnInit {
 
   checkAvailableUsername(): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      return this.authenticationService.checkAvailableUsername(control.value)
+      return this.authenticationHttpService.checkAvailableUsername(control.value)
         .pipe(
           map(res => {
             return res.username ? { usernameExists: true } : null;

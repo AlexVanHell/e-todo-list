@@ -10,3 +10,11 @@ export interface AvailableUsernameResponse {
 export interface AvailableEmailResponse {
 	email: string;
 }
+
+export interface AuthenticatedUserResponse {
+	email: string;
+	username: string;
+	firstName: string;
+	lastName: string;
+	secondLastName: string;
+}
