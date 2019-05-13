@@ -88,7 +88,7 @@ export class SignupComponent implements OnInit {
     return (control: AbstractControl) => {
       return this.authenticationService.checkAvailableEmail(control.value)
         .pipe(
-          map((res: any) => {
+          map(res => {
             return res.email ? { emailExists: true } : null;
           })
         )
@@ -99,7 +99,7 @@ export class SignupComponent implements OnInit {
     return (control: AbstractControl) => {
       return this.authenticationService.checkAvailableUsername(control.value)
         .pipe(
-          map((res: any) => {
+          map(res => {
             return res.username ? { usernameExists: true } : null;
           })
         )
