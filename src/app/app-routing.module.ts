@@ -5,7 +5,7 @@ import { NoAuthGuard } from './core/guards/no-auth/no-auth.guard';
 const routes: Routes = [{
   path: '',
   loadChildren: './modules/authentication/authentication.module#AuthenticationModule',
-  canActivateChild: [NoAuthGuard]
+  canActivateChild: [NoAuthGuard],
 }, {
   path: '',
   loadChildren: './modules/home/home.module#HomeModule'

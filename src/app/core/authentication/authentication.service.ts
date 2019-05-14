@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthenticatedUserResponse, AuthResponse } from '../../shared/models/response/auth-response';
+import { IUser } from '../../shared/models/app/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthenticationService {
     return localStorage.getItem(name);
   }
 
-  getUser(): AuthenticatedUserResponse {
+  getUser(): IUser {
     const value = this.getItem(this.sessionName);
 
     if (value) {

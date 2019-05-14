@@ -1,5 +1,18 @@
-<p>
-  home works!
-</p>
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-12">
+      <app-user-info [firstName]="user.firstName" [lastName]="user.lastName" [user]="user" (onLogoutClick)="handleLogout($event)"></app-user-info>
 
-<button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+      Hola {{ user.getFullName() }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </div>
+</div>
+
+
+
