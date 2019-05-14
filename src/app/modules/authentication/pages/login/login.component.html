@@ -61,12 +61,15 @@
             </small>
           </div>
           <div class="col-12 text-center pt-3">
-            <button class="btn btn-primary" (click)="submit()">Aceptar</button>
+            <button class="btn btn-primary btn-block" (click)="submit()">Aceptar</button>
           </div>
         </form>
+        <div class="row">
+          <div class="col-12 pt-3 text-right">
+            <a class="btn btn-info" [routerLink]="['/signup']">Registrarse</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<a class="btn btn-primary" [routerLink]="['/signup']">Iniciar sesión</a>

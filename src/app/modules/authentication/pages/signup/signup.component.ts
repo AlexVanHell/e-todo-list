@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, AsyncValidatorFn, AbstractControl }
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationHttpService } from '../../../../core/http/authentication/authentication-http.service';
+import { AuthenticationService } from '../../../../core/authentication/authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +22,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authenticationHttpService: AuthenticationHttpService,
+    private authHttpService: AuthenticationHttpService,
+    private authService: AuthenticationService,
     private router: Router
   ) { }
 
@@ -69,10 +71,15 @@ export class SignupComponent implements OnInit {
     user.password = user.passwords.password;
     delete user.passwords;
 
-    this.authenticationHttpService.signup(user)
+    this.authHttpService.signup(user)
       .subscribe(res => {
-        console.log('Se registro el vato');
-        this.router.navigate(['/login']);
+        this.authService.setToken(res);
+
+        this.authHttpService.getAuthentication(res.token)
+          .subscribe(user => {
+            this.authService.setUser(user);
+            this.router.navigate(['/home']);
+          });
       }, err => {
         console.log(err);
         this.formError = 'Hubo un error';
@@ -86,7 +93,7 @@ export class SignupComponent implements OnInit {
 
   checkAvailableEmail(): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      return this.authenticationHttpService.checkAvailableEmail(control.value)
+      return this.authHttpService.checkAvailableEmail(control.value)
         .pipe(
           map(res => {
             return res.email ? { emailExists: true } : null;
@@ -97,7 +104,7 @@ export class SignupComponent implements OnInit {
 
   checkAvailableUsername(): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      return this.authenticationHttpService.checkAvailableUsername(control.value)
+      return this.authHttpService.checkAvailableUsername(control.value)
         .pipe(
           map(res => {
             return res.username ? { usernameExists: true } : null;

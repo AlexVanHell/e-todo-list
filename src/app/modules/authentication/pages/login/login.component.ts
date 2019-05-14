@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
     this.authHttpService.login(this.loginForm.value)
       .subscribe(res => {
-        console.log(res);
+        //console.log(res);
         this.authService.setToken(res);
 
         this.authHttpService.getAuthentication(res.token)

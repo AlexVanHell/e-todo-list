@@ -41,4 +41,13 @@ export class AuthenticationService {
   setToken(token: AuthResponse): void {
     localStorage.setItem(this.tokenName, JSON.stringify(token));
   }
+
+  destroySession(): void {
+    localStorage.removeItem(this.sessionName);
+    localStorage.removeItem(this.tokenName);
+  }
+
+  isLoggedIn(): boolean {
+    return this.getToken() !== null;
+  }
 }
