@@ -8,15 +8,19 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '../../shared/shared.module';
 import { PaginationModule } from '../../shared/components/pagination/pagination.module';
+import { TodoItemComponent } from './components/todo-item/todo-item.component';
+
+import { PaginationModule as BsPaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
-  declarations: [HomeComponent, UserInfoComponent, TodoListComponent],
+  declarations: [HomeComponent, UserInfoComponent, TodoListComponent, TodoItemComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
     FontAwesomeModule,
     SharedModule,
-    PaginationModule
+    PaginationModule,
+    BsPaginationModule.forRoot()
   ]
 })
 export class HomeModule { }

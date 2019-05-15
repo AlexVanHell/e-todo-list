@@ -2,15 +2,33 @@
 
 <app-spinner-loader *ngIf="!list.length"></app-spinner-loader>
 
-<div class="list-group">
-  <a class="list-group-item list-group-item-action" *ngFor="let item of list; let i=index">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{ item.title }}</h5>
-      <small>{{ item.date | customDate: 'short' }}</small>
+<app-pagination>
+  <div class="row">
+    <div class="col-xs-12 col-12">
+      <pagination
+        [boundaryLinks]="true"
+        [totalItems]="list.length"
+        [itemsPerPage]="5"
+        [maxSize]="5"
+      ></pagination>
     </div>
-    <p class="mb-1">
-      {{ item.description }}
-    </p>
-    <!-- <small>Donec id elit non mi porta.</small> -->
-  </a>
-</div>
+  </div>
+
+  <div class="list-group">
+    <app-todo-item
+      *ngFor="let item of list; let i = index"
+      [item]="item"
+    ></app-todo-item>
+
+    <!-- <a class="list-group-item list-group-item-action" *ngFor="let item of list; let i=index">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ item.title }}</h5>
+        <small>{{ item.date | customDate: 'short' }}</small>
+      </div>
+      <p class="mb-1">
+        {{ item.description }}
+      </p>
+      <small>Donec id elit non mi porta.</small>
+    </a> -->
+  </div>
+</app-pagination>
