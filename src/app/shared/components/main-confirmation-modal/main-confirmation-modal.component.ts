@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { MainConfirmationModalService } from './service/main-confirmation-modal.service';
 import { Subscription } from 'rxjs';
+import { MainAlert, MainAlertAction } from '../../models/app/main-alert';
 
 @Component({
   selector: 'app-main-confirmation-modal',
@@ -10,10 +11,9 @@ import { Subscription } from 'rxjs';
 })
 export class MainConfirmationModalComponent implements OnInit {
   modalRef: BsModalRef;
-  message: string;
-  info: any;
+  info: MainAlert;
   subscription: Subscription;
-  resolveFn: (value?: string) => void | PromiseLike<void>;
+  resolveFn: (value?: MainAlertAction) => void | PromiseLike<void>;
   @ViewChild('template') template: TemplateRef<any>;
 
   constructor(
@@ -25,7 +25,7 @@ export class MainConfirmationModalComponent implements OnInit {
     this.subscription = this.mcmService.alertSubject
       .subscribe((obj) => {
         this.resolveFn = obj.resolve;
-
+        this.info = Object.assign({}, this.getDefaultAlert(), obj.info);
         this.openModal(this.template);
       });
   }
@@ -35,14 +35,31 @@ export class MainConfirmationModalComponent implements OnInit {
   }
 
   confirm(): void {
-    this.message = 'Confirmed!';
     this.modalRef.hide();
-    this.resolveFn('accept');
+    this.resolveFn({
+      accepted: true,
+      canceled: false
+    });
   }
 
   decline(): void {
-    this.message = 'Declined!';
     this.modalRef.hide();
-    this.resolveFn('cancel');
+    this.resolveFn({
+      accepted: false,
+      canceled: false
+    });
+  }
+
+  getDefaultAlert(): MainAlert {
+    return {
+      title: '',
+      body: '¿Estás seguro de realizar la acción?',
+      acceptButtonColor: 'primary',
+      acceptButtonText: 'Si',
+      cancelButton: true,
+      cancelButtonColor: 'default',
+      cancelButtonText: 'No',
+      important: false
+    }
   }
 }

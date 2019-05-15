@@ -29,9 +29,12 @@ export class HomeComponent implements OnInit {
   }
 
   handleLogout(event: string): void {
-    this.mcmService.show({})
+    this.mcmService.show({
+      title: 'Confirmación',
+      body: '¿Estás seguro de hacer tu cagadero?'
+    })
       .then(value => {
-        if (value === 'accept') {
+        if (value.accepted) {
           this.logout();
         } else {
           console.log('Click en cancelar');

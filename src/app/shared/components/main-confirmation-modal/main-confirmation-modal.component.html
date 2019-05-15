@@ -1,11 +1,21 @@
 <ng-template #template>
   <div class="modal-body text-center">
-    <p>Do you want to confirm?</p>
-    <button type="button" class="btn btn-default" (click)="confirm()">
-      Yes
+    <h4 *ngIf="info.title">{{ info.title }}</h4>
+    <p>{{ info.body }}</p>
+    <button
+      type="button"
+      class="btn btn-{{ info.acceptButtonColor }}"
+      (click)="confirm()"
+    >
+      {{ info.acceptButtonText }}
     </button>
-    <button type="button" class="btn btn-primary" (click)="decline()">
-      No
+    <button
+      type="button"
+      class="btn btn-{{ info.cancelButtonColor }}"
+      (click)="decline()"
+      *ngIf="info.cancelButton"
+    >
+      {{ info.cancelButtonText }}
     </button>
   </div>
 </ng-template>
