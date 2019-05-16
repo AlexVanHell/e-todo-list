@@ -11,6 +11,7 @@ import { PaginationModule } from '../../shared/components/pagination/pagination.
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 
 import { PaginationModule as BsPaginationModule } from 'ngx-bootstrap/pagination';
+import { CollapsibleListModule } from '../../shared/components/collapsible-list/collapsible-list.module';
 
 @NgModule({
   declarations: [HomeComponent, UserInfoComponent, TodoListComponent, TodoItemComponent],
@@ -20,7 +21,8 @@ import { PaginationModule as BsPaginationModule } from 'ngx-bootstrap/pagination
     FontAwesomeModule,
     SharedModule,
     PaginationModule,
-    BsPaginationModule.forRoot()
+    BsPaginationModule.forRoot(),
+    CollapsibleListModule
   ]
 })
 export class HomeModule { }

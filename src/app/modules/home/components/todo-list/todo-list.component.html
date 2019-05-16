@@ -10,25 +10,35 @@
         [totalItems]="list.length"
         [itemsPerPage]="5"
         [maxSize]="5"
+        [hidden]="!list.length"
       ></pagination>
     </div>
   </div>
 
-  <div class="list-group">
-    <app-todo-item
-      *ngFor="let item of list; let i = index"
-      [item]="item"
-    ></app-todo-item>
+  <div class="row">
+    <div class="col-12">
+      <div class="list-group">
+        <app-pagination-list [items]="list">
+          <app-collapsible-list>
+            <ng-template let-item let-i="index" #tmpl>
+              <app-collapsible-item>
+                <app-todo-item [item]="item" #top></app-todo-item>
+              </app-collapsible-item>
+            </ng-template>
+          </app-collapsible-list>
+        </app-pagination-list>
 
-    <!-- <a class="list-group-item list-group-item-action" *ngFor="let item of list; let i=index">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{ item.title }}</h5>
-        <small>{{ item.date | customDate: 'short' }}</small>
+        <!-- <a class="list-group-item list-group-item-action" *ngFor="let item of list; let i=index">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ item.title }}</h5>
+                <small>{{ item.date | customDate: 'short' }}</small>
+              </div>
+              <p class="mb-1">
+                {{ item.description }}
+              </p>
+              <small>Donec id elit non mi porta.</small>
+            </a> -->
       </div>
-      <p class="mb-1">
-        {{ item.description }}
-      </p>
-      <small>Donec id elit non mi porta.</small>
-    </a> -->
+    </div>
   </div>
 </app-pagination>
