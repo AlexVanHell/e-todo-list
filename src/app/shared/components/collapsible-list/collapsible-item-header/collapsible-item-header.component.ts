@@ -17,7 +17,6 @@ export class CollapsibleItemHeaderComponent implements OnInit {
 
   @HostListener('click', ['$event'])
   handleClick(event: any): void {
-    console.log(event);
     this.onClick.emit('clicked');
   }
 

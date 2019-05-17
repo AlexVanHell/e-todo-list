@@ -16,9 +16,15 @@
   </div>
 
   <div class="row">
+    <div class="col-12 input-field py-2">
+      <input appPaginationSearchInputRef [fields]="['title', 'description']" type="text" class="form-control" placeholder="Buscar">
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-12">
       <div class="list-group">
-        <app-collapsible-list>
+        <app-collapsible-list [multiple]="true">
           <!-- <app-collapsible-item>
             <app-collapsible-item-header>
               <p>
@@ -52,9 +58,7 @@
                   <app-todo-item [item]="item"></app-todo-item>
                 </app-collapsible-item-header>
                 <app-collapsible-item-body>
-                  <p>
-                    Text {{ i + 1 }}
-                  </p>
+                  <p>Text {{ i + 1 }}</p>
                 </app-collapsible-item-body>
               </app-collapsible-item>
 
@@ -93,3 +97,30 @@
     </div>
   </div>
 </app-pagination>
+
+<!-- <ng-template #template let-item>
+  {{ item }}
+  <div>
+    Hola
+  </div>
+  <div>
+    {{ item.text }}
+  </div>
+  <span *ngIf="item.other">
+    <button>Boton</button>
+  </span>
+</ng-template>
+
+<ng-template
+  [ngTemplateOutlet]="template"
+  [ngTemplateOutletContext]="{ $implicit: { text: 'Esto es una prueba' } }"
+>
+</ng-template>
+
+<ng-template
+  [ngTemplateOutlet]="template"
+  [ngTemplateOutletContext]="{
+    $implicit: { text: 'Otra prueba', other: true }
+  }"
+>
+</ng-template> -->

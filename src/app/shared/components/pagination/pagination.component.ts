@@ -4,6 +4,7 @@ import { Component, OnInit, ContentChild, AfterContentInit, OnDestroy } from '@a
 import { PaginationComponent as BsPaginationComponent } from 'ngx-bootstrap/pagination'
 import { PaginationListComponent } from './pagination-list/pagination-list.component';
 import { Subscription } from 'rxjs';
+import { SearchInputRefDirective } from './directives/search-input-ref/search-input-ref.directive';
 
 @Component({
   selector: 'app-pagination',
@@ -13,7 +14,10 @@ import { Subscription } from 'rxjs';
 export class PaginationComponent implements OnInit, AfterContentInit, OnDestroy {
   @ContentChild(BsPaginationComponent) bsPagination: BsPaginationComponent;
   @ContentChild(PaginationListComponent) listComponent: PaginationListComponent;
+  @ContentChild(SearchInputRefDirective) searchInput: SearchInputRefDirective;
+
   subscription: Subscription;
+  searchSubscription: Subscription;
 
   constructor() { }
 
@@ -21,6 +25,7 @@ export class PaginationComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   ngAfterContentInit() {
+    console.log(this.searchInput);
     this.listComponent.itemsPerPage = this.bsPagination.itemsPerPage;
     this.listComponent.ngOnChanges({});
 
@@ -30,11 +35,25 @@ export class PaginationComponent implements OnInit, AfterContentInit, OnDestroy 
         this.listComponent.page = value.page;
         this.listComponent.ngOnChanges({});
       });
+
+    if (this.searchInput) {
+      this.listComponent.searchParams = this.searchInput.searchParams.slice();
+
+      this.searchSubscription = this.searchInput.onInput
+        .subscribe((value: string) => {
+          this.listComponent.searchValue = value;
+          this.listComponent.ngOnChanges({});
+        })
+    }
   }
 
   ngOnDestroy() {
     if (this.subscription || this.subscription.unsubscribe) {
       this.subscription.unsubscribe();
+    }
+
+    if (this.searchSubscription || this.searchSubscription.unsubscribe) {
+      this.searchSubscription.unsubscribe();
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, QueryList, AfterContentInit, OnDestroy, AfterViewInit, AfterContentChecked, TemplateRef } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, AfterContentInit, OnDestroy, TemplateRef, Input } from '@angular/core';
 import { CollapsibleItemComponent } from '../collapsible-item/collapsible-item.component';
 import { Subscription } from 'rxjs';
 
@@ -8,9 +8,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./collapsible-list.component.scss']
 })
 export class CollapsibleListComponent implements OnInit, AfterContentInit, OnDestroy {
-  @ContentChildren(TemplateRef) itemsList: QueryList<TemplateRef<CollapsibleItemComponent>>;
-  @ContentChildren(CollapsibleItemComponent, { descendants: true }) itemsComponents: QueryList<TemplateRef<CollapsibleItemComponent>>;
+  @ContentChildren(CollapsibleItemComponent, { descendants: true }) itemsComponents: QueryList<CollapsibleItemComponent>;
+  @Input() multiple: boolean = true;
   subscription: Subscription;
+  toggleSubscriptions: Subscription[] = [];
 
   constructor() { }
 
@@ -18,12 +19,12 @@ export class CollapsibleListComponent implements OnInit, AfterContentInit, OnDes
   }
 
   ngAfterContentInit() {
-    console.log('itemsList', this.itemsList);
-    console.log('itemsComps', this.itemsComponents);
-
-    this.subscription = this.itemsList.changes
+    this.subscription = this.itemsComponents.changes
       .subscribe(value => {
-        console.log(value);
+        //console.log(value);
+        if (this.multiple) {
+          this.processChildren();
+        }
       });
   }
 
@@ -31,6 +32,28 @@ export class CollapsibleListComponent implements OnInit, AfterContentInit, OnDes
     if (this.subscription && this.subscription.unsubscribe) {
       this.subscription.unsubscribe();
     }
+
+    if (this.toggleSubscriptions && this.toggleSubscriptions.length) {
+      this.toggleSubscriptions.forEach(subs => {
+        subs.unsubscribe();
+      });
+    }
+  }
+
+  processChildren(): void {
+    this.toggleSubscriptions = [];
+
+    this.itemsComponents.forEach(component => {
+      let subs = component.onToggle.subscribe(value => {
+        this.itemsComponents.forEach(x => {
+          if (x !== component) {
+            x.update(true);
+          }
+        });
+      });
+
+      this.toggleSubscriptions.push(subs);
+    });
   }
 
 }

@@ -11,6 +11,8 @@ export class PaginationListComponent implements OnInit, OnChanges {
   paginatedItems: any[] = [];
   page: number = 1;
   itemsPerPage: number = 0;
+  searchParams: string[] = [];
+  searchValue: string = '';
 
   constructor() { }
 
@@ -18,7 +20,11 @@ export class PaginationListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.setPaginatedItems(this.page, this.itemsPerPage);
+    if (this.searchValue) {
+      this.setSearchItems(this.searchValue, this.searchParams);
+    } else {
+      this.setPaginatedItems(this.page, this.itemsPerPage);
+    }
   }
 
   setPaginatedItems(page: number, itemsPerPage: number): void {
@@ -26,6 +32,16 @@ export class PaginationListComponent implements OnInit, OnChanges {
     let end = start + itemsPerPage;
 
     this.paginatedItems = this.items.slice(start, end);
+  }
+
+  setSearchItems(value: string, searchParams: string[] = []): void {
+    this.paginatedItems = this.items.filter(item => {
+      return Object.keys(item)
+        .filter(key => searchParams.indexOf(key) > -1)
+        .filter(key => {
+          return item[key].toString().indexOf(value) > -1;
+        }).length > 0;
+    })
   }
 
 }
