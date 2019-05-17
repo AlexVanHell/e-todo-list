@@ -47,15 +47,26 @@
 
           <app-pagination-list [items]="list">
             <ng-template let-item let-i="index">
-              <ng-template
+              <app-collapsible-item>
+                <app-collapsible-item-header>
+                  <app-todo-item [item]="item"></app-todo-item>
+                </app-collapsible-item-header>
+                <app-collapsible-item-body>
+                  <p>
+                    Text {{ i + 1 }}
+                  </p>
+                </app-collapsible-item-body>
+              </app-collapsible-item>
+
+              <!-- <ng-template
                 [ngTemplateOutlet]="collapsible"
                 [ngTemplateOutletContext]="{ $implicit: item }"
-              ></ng-template>
+              ></ng-template> -->
             </ng-template>
           </app-pagination-list>
         </app-collapsible-list>
 
-        <ng-template #collapsible let-item>
+        <!-- <ng-template #collapsible let-item>
           <app-collapsible-item>
             <app-collapsible-item-header>
               <app-todo-item [item]="item"></app-todo-item>
@@ -66,7 +77,7 @@
               </p>
             </app-collapsible-item-body>
           </app-collapsible-item>
-        </ng-template>
+        </ng-template> -->
 
         <!-- <a class="list-group-item list-group-item-action" *ngFor="let item of list; let i=index">
               <div class="d-flex w-100 justify-content-between">

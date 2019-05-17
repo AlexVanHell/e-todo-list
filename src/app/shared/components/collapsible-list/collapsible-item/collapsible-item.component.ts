@@ -13,7 +13,7 @@ export class CollapsibleItemComponent implements OnInit, AfterContentInit, OnDes
   @Output() onToggle: EventEmitter<any>;
   @Input() isCollapsed: boolean = true;
   @ContentChild(CollapsibleItemHeaderComponent) topContent: CollapsibleItemHeaderComponent;
-  @ContentChild(CollapsibleItemBodyComponent) bottomContent: CollapseDirective;
+  @ContentChild(CollapsibleItemBodyComponent) bottomContent: CollapsibleItemBodyComponent;
   subscription: Subscription;
 
   constructor() {
