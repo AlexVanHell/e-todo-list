@@ -15,8 +15,6 @@ export class CustomDatePipe implements PipeTransform {
       dateTransform = new Date(value);
     }
 
-    console.log(args);
-
     let year: string = dateTransform.getFullYear().toString();
     let month: number = dateTransform.getMonth();
     let day: string = this.fillDigits(dateTransform.getDate());

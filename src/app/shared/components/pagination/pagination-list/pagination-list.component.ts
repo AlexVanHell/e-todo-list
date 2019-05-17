@@ -18,7 +18,6 @@ export class PaginationListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes', changes);
     this.setPaginatedItems(this.page, this.itemsPerPage);
   }
 

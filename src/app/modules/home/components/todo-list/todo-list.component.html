@@ -18,15 +18,55 @@
   <div class="row">
     <div class="col-12">
       <div class="list-group">
-        <app-pagination-list [items]="list">
-          <app-collapsible-list>
-            <ng-template let-item let-i="index" #tmpl>
-              <app-collapsible-item>
-                <app-todo-item [item]="item" #top></app-todo-item>
-              </app-collapsible-item>
+        <app-collapsible-list>
+          <!-- <app-collapsible-item>
+            <app-collapsible-item-header>
+              <p>
+                Hola
+              </p>
+            </app-collapsible-item-header>
+            <app-collapsible-item-body>
+              <p>
+                Texto de prueba
+              </p>
+            </app-collapsible-item-body>
+          </app-collapsible-item>
+
+          <app-collapsible-item *ngIf="list.length">
+            <app-collapsible-item-header>
+              <p>
+                Hola
+              </p>
+            </app-collapsible-item-header>
+            <app-collapsible-item-body>
+              <p>
+                Texto de prueba
+              </p>
+            </app-collapsible-item-body>
+          </app-collapsible-item> -->
+
+          <app-pagination-list [items]="list">
+            <ng-template let-item let-i="index">
+              <ng-template
+                [ngTemplateOutlet]="collapsible"
+                [ngTemplateOutletContext]="{ $implicit: item }"
+              ></ng-template>
             </ng-template>
-          </app-collapsible-list>
-        </app-pagination-list>
+          </app-pagination-list>
+        </app-collapsible-list>
+
+        <ng-template #collapsible let-item>
+          <app-collapsible-item>
+            <app-collapsible-item-header>
+              <app-todo-item [item]="item"></app-todo-item>
+            </app-collapsible-item-header>
+            <app-collapsible-item-body>
+              <p>
+                {{ item.description }}
+              </p>
+            </app-collapsible-item-body>
+          </app-collapsible-item>
+        </ng-template>
 
         <!-- <a class="list-group-item list-group-item-action" *ngFor="let item of list; let i=index">
               <div class="d-flex w-100 justify-content-between">

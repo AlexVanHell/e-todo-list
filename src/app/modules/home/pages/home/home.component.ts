@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
         if (value.accepted) {
           this.logout();
         } else {
-          console.log('Click en cancelar');
+          //console.log('Click en cancelar');
         }
       });
   }

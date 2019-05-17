@@ -4,16 +4,20 @@ import { CollapsibleListComponent } from './collapsible-list/collapsible-list.co
 import { CollapsibleItemComponent } from './collapsible-item/collapsible-item.component';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { CollapsibleItemHeaderComponent } from './collapsible-item-header/collapsible-item-header.component';
+import { CollapsibleItemBodyComponent } from './collapsible-item-body/collapsible-item-body.component';
 
 @NgModule({
-  declarations: [CollapsibleListComponent, CollapsibleItemComponent],
+  declarations: [CollapsibleListComponent, CollapsibleItemComponent, CollapsibleItemHeaderComponent, CollapsibleItemBodyComponent],
   imports: [
     CommonModule,
     CollapseModule
   ],
   exports: [
     CollapsibleListComponent,
-    CollapsibleItemComponent
+    CollapsibleItemComponent,
+    CollapsibleItemHeaderComponent,
+    CollapsibleItemBodyComponent
   ]
 })
 export class CollapsibleListModule { }
