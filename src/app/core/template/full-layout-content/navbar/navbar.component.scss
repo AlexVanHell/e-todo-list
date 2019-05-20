@@ -1,0 +1,16 @@
+.menu-btn {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0 12px 0 0;
+  background-color: transparent;
+  vertical-align: middle;
+  line-height: 32px;
+  border: none;
+  border-radius: 100%;
+
+  &:hover {
+    background-color: rgba($color: #000, $alpha: 0.2);
+  }
+}

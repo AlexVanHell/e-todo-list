@@ -12,7 +12,7 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.list = this.generateList(10);
+      this.list = this.generateList(40);
     }, 2000);
   }
 

@@ -1,3 +1,13 @@
-<ng-template ngFor [ngForOf]="paginatedItems" [ngForTemplate]="tmpl">
-  <!-- Insert template here -->
-</ng-template>
+<!-- <ng-template ngFor [ngForOf]="paginatedItems" [ngForTemplate]="tmpl">
+  Insert template here
+</ng-template> -->
+
+<ng-container *ngFor="let item of paginatedItems; let i = index">
+  <ng-template
+    [ngTemplateOutlet]="tmpl"
+    [ngTemplateOutletContext]="{
+      $implicit: item,
+      absoluteIndex: item.absoluteIndex
+    }"
+  ></ng-template>
+</ng-container>

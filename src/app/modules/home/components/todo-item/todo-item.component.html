@@ -1,6 +1,9 @@
 <a class="list-group-item list-group-item-action">
   <div class="d-flex w-100 justify-content-between">
-    <h5 class="mb-1">{{ item.title }}</h5>
+    <h5 class="mb-1">
+      <span>{{ index }}</span>
+      {{ item.title }}
+    </h5>
     <small>{{ item.date | customDate: 'short' }}</small>
   </div>
   <p class="mb-1">

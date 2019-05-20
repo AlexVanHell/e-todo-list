@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TodoItemComponent implements OnInit {
   @Input() item: any = {};
+  @Input() index: number = 0;
 
   constructor() { }
 

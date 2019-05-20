@@ -7,7 +7,17 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, TemplateRef, Conten
 })
 export class PaginationListComponent implements OnInit, OnChanges {
   @ContentChild(TemplateRef) tmpl: TemplateRef<any>;
-  @Input('items') items: any[] = [];
+  @Input('items')
+  set list(items: any[]) {
+    if (Array.isArray(items)) {
+      this.items = items.map((x, i) => {
+        x.absoluteIndex = i;
+        return x;
+      });
+    }
+  }
+
+  items: any[] = [];
   paginatedItems: any[] = [];
   page: number = 1;
   itemsPerPage: number = 0;

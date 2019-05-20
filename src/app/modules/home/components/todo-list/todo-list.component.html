@@ -52,10 +52,10 @@
           </app-collapsible-item> -->
 
           <app-pagination-list [items]="list">
-            <ng-template let-item let-i="index">
+            <ng-template let-item let-i="index" let-abs="absoluteIndex">
               <app-collapsible-item>
                 <app-collapsible-item-header>
-                  <app-todo-item [item]="item"></app-todo-item>
+                  <app-todo-item [item]="item" [index]="abs + 1"></app-todo-item>
                 </app-collapsible-item-header>
                 <app-collapsible-item-body>
                   <p>Text {{ i + 1 }}</p>
