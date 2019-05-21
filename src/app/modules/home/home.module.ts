@@ -12,9 +12,10 @@ import { TodoItemComponent } from './components/todo-item/todo-item.component';
 
 import { PaginationModule as BsPaginationModule } from 'ngx-bootstrap/pagination';
 import { CollapsibleListModule } from '../../shared/components/collapsible-list/collapsible-list.module';
+import { TodoItemActionsComponent } from './components/todo-item-actions/todo-item-actions.component';
 
 @NgModule({
-  declarations: [HomeComponent, UserInfoComponent, TodoListComponent, TodoItemComponent],
+  declarations: [HomeComponent, UserInfoComponent, TodoListComponent, TodoItemComponent, TodoItemActionsComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

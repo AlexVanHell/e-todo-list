@@ -17,7 +17,13 @@
 
   <div class="row">
     <div class="col-12 input-field py-2">
-      <input appPaginationSearchInputRef [fields]="['title', 'description']" type="text" class="form-control" placeholder="Buscar">
+      <input
+        appPaginationSearchInputRef
+        [fields]="['title', 'description']"
+        type="text"
+        class="form-control"
+        placeholder="Buscar"
+      />
     </div>
   </div>
 
@@ -53,14 +59,21 @@
 
           <app-pagination-list [items]="list">
             <ng-template let-item let-i="index" let-abs="absoluteIndex">
-              <app-collapsible-item>
-                <app-collapsible-item-header>
-                  <app-todo-item [item]="item" [index]="abs + 1"></app-todo-item>
-                </app-collapsible-item-header>
-                <app-collapsible-item-body>
-                  <p>Text {{ i + 1 }}</p>
-                </app-collapsible-item-body>
-              </app-collapsible-item>
+              <div @deleteSlide>
+                <app-collapsible-item>
+                  <app-collapsible-item-header>
+                    <app-todo-item
+                      [item]="item"
+                      [index]="abs + 1"
+                    ></app-todo-item>
+                  </app-collapsible-item-header>
+                  <app-collapsible-item-body>
+                    <app-todo-item-actions
+                      (onDeleteClick)="deleteItem(item)"
+                    ></app-todo-item-actions>
+                  </app-collapsible-item-body>
+                </app-collapsible-item>
+              </div>
 
               <!-- <ng-template
                 [ngTemplateOutlet]="collapsible"

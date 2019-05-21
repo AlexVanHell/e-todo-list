@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { MainConfirmationModalService } from '../../../../shared/components/main-confirmation-modal/service/main-confirmation-modal.service';
+import { deleteSlide } from '../../../../shared/animations/delete-slide';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss']
+  styleUrls: ['./todo-list.component.scss'],
+  animations: [deleteSlide]
 })
 export class TodoListComponent implements OnInit {
   list: any[] = [];
 
-  constructor() {}
+  constructor(
+    private mcmService: MainConfirmationModalService
+  ) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -27,11 +32,26 @@ export class TodoListComponent implements OnInit {
         date.setHours(hour, 0, 0, 0);
 
         return {
+          id: (i + 1),
           title: 'Cosa por hacer ' + (i + 1).toString(),
           description: 'Una descripción chida',
           date: date
         }
       })
+  }
+
+  deleteItem(item: any): void {
+    this.mcmService.show({
+      body: `Estas seguro que deseas eliminar el elemento: "${item.title}"?`,
+      title: 'Eliminar elemento',
+      important: true
+    }).then(value => {
+      if (value.accepted) {
+        let index = this.list.findIndex(x => x.id === item.id);
+        this.list.splice(index, 1);
+        this.list = this.list.slice();
+      }
+    });
   }
 
 }

@@ -1,12 +1,42 @@
-<div class="sidebar" #sidebar>
+<div class="sidebar" #sidebar [@openClose]="status ? 'open' : 'closed'">
   <div class="sidebar-content">
     <div class="sidebar-profile">
       <button class="sidebar-close">
-        <fa-icon [icon]="'times'" class="text-muted" (click)="close()"></fa-icon>
+        <fa-icon
+          [icon]="'times'"
+          class="text-muted"
+          (click)="close()"
+        ></fa-icon>
       </button>
+      <div class="sidebar-profile-image">
+        <span>
+          <fa-icon [icon]="'user'" class="text-muted"></fa-icon>
+        </span>
+      </div>
+      <div class="sidebar-profile-info">
+        <div class="p-3">
+          <h5>{{ user.getFullName() }}</h5>
+          <p class="m-0">{{ user.email }}</p>
+        </div>
+      </div>
     </div>
     <div class="sidebar-options">
-
+      <h3 class="p-3">Menú</h3>
+      <ul class="list-group list-group-flush">
+        <li
+          class="list-group-item list-group-item-action"
+          *ngFor="let item of options; let i = index"
+        >
+          <fa-icon [icon]="item.icon" class="mr-4 text-muted"></fa-icon>
+          <a [routerLink]="[item.route]" class="d-inline-block text-secondary">
+            <span>{{ item.title }}</span>
+          </a>
+        </li>
+        <li class="list-group-item list-group-item-action">
+          <fa-icon [icon]="'sign-out-alt'" class="mr-4 text-danger"></fa-icon>
+          <span class="text-danger">Salir</span>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

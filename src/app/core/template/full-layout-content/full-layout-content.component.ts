@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from '../../authentication/authentication.service';
+import { IUser, User } from '../../../shared/models/app/user';
 
 @Component({
   selector: 'app-full-layout-content',
@@ -12,8 +14,13 @@ export class FullLayoutContentComponent implements OnInit, AfterViewInit, OnDest
   @ViewChild(SidebarComponent) sidebar: SidebarComponent;
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
   subscription: Subscription;
+  user: IUser = null;
 
-  constructor() { }
+  constructor(
+    private auth: AuthenticationService
+  ) {
+    this.user = new User(auth.getUser());
+  }
 
   ngOnInit() {
   }

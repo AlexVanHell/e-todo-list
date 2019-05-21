@@ -25,7 +25,6 @@ export class PaginationComponent implements OnInit, AfterContentInit, OnDestroy 
   }
 
   ngAfterContentInit() {
-    console.log(this.searchInput);
     this.listComponent.itemsPerPage = this.bsPagination.itemsPerPage;
     this.listComponent.ngOnChanges({});
 

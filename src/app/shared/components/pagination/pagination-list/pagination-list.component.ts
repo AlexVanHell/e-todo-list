@@ -10,7 +10,7 @@ export class PaginationListComponent implements OnInit, OnChanges {
   @Input('items')
   set list(items: any[]) {
     if (Array.isArray(items)) {
-      this.items = items.map((x, i) => {
+      this.items = items.slice().map((x, i) => {
         x.absoluteIndex = i;
         return x;
       });
