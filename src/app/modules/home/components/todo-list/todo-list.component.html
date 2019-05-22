@@ -69,7 +69,9 @@
                   </app-collapsible-item-header>
                   <app-collapsible-item-body>
                     <app-todo-item-actions
+                      [item]="item"
                       (onDeleteClick)="deleteItem(item)"
+                      (onToggleClick)="toggleItem(item)"
                     ></app-todo-item-actions>
                   </app-collapsible-item-body>
                 </app-collapsible-item>

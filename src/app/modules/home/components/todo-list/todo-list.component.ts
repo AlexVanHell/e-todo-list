@@ -54,4 +54,15 @@ export class TodoListComponent implements OnInit {
     });
   }
 
+  toggleItem(item: any): void {
+    this.mcmService.show({
+      body: `Estás seguro de ${ item.active ? 'Desactivar' : 'Activar' } el elemento: "${item.title}"`,
+      title: item.active ? 'Desactivar' : 'Activar'
+    }).then(value => {
+      if (value.accepted) {
+        item.active = !item.active;
+      }
+    });
+  }
+
 }

@@ -6,9 +6,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { SpinnerLoaderComponent } from './components/spinner-loader/spinner-loader.component';
 import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
+import { SwitchComponent } from './components/switch/switch.component';
 
 @NgModule({
-  declarations: [PasswordPreviewDirective, PasswordPreviewComponent, SpinnerLoaderComponent, CustomDatePipe],
+  declarations: [PasswordPreviewDirective, PasswordPreviewComponent, SpinnerLoaderComponent, CustomDatePipe, SwitchComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -19,7 +20,8 @@ import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
     PasswordPreviewComponent,
     FontAwesomeModule,
     SpinnerLoaderComponent,
-    CustomDatePipe
+    CustomDatePipe,
+    SwitchComponent
   ]
 })
 export class SharedModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-todo-item-actions',
@@ -7,9 +7,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class TodoItemActionsComponent implements OnInit {
   @Output() onDeleteClick: EventEmitter<boolean>;
+  @Output() onToggleClick: EventEmitter<boolean>;
+  @Input() item: any = {};
 
   constructor() {
     this.onDeleteClick = new EventEmitter();
+    this.onToggleClick = new EventEmitter();
   }
 
   ngOnInit() {

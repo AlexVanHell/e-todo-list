@@ -1,0 +1,6 @@
+<div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" [id]="id" [checked]="checked" (click)="handleChange($event)"/>
+  <label class="custom-control-label" [for]="id" *ngIf="label">
+    {{ label }}
+  </label>
+</div>
