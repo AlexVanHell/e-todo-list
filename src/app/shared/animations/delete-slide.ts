@@ -12,10 +12,10 @@ export const deleteSlide = trigger('deleteSlide', [
 			overflow: 'hidden'
 		}),
 		animate('0.1s', style({
-			height: '20px',
+			transform: 'scaleY(0.5)',
 		})),
 		animate('0.5s', style({
-			transform: 'translateX(100%)',
+			transform: 'scaleY(0.5) translateX(100%)',
 		}))
 	])
-])
+]);

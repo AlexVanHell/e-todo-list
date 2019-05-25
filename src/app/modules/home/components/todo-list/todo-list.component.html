@@ -4,7 +4,7 @@
 
 <app-pagination>
   <div class="row">
-    <div class="col-xs-12 col-12">
+    <div class="col-12 col-md-6">
       <pagination
         [boundaryLinks]="true"
         [totalItems]="list.length"
@@ -12,6 +12,11 @@
         [maxSize]="5"
         [hidden]="!list.length"
       ></pagination>
+    </div>
+    <div class="col-12 col-md-6 text-right">
+      <a class="btn btn-primary" [routerLink]="['/todo/new']">
+        Nuevo
+      </a>
     </div>
   </div>
 

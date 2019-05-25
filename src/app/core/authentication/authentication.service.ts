@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AuthenticatedUserResponse, AuthResponse } from '../../shared/models/response/auth-response';
 import { IUser } from '../../shared/models/app/user';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  sessionName: string = 'current-user';
-  tokenName: string = 'token';
+  sessionName: string =  environment.appName + '-current-user';
+  tokenName: string = environment.appName + '-token';
 
   constructor() { }
 

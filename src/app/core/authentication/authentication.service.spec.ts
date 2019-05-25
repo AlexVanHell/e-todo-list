@@ -9,4 +9,14 @@ describe('AuthenticationService', () => {
     const service: AuthenticationService = TestBed.get(AuthenticationService);
     expect(service).toBeTruthy();
   });
+
+  it('should return user object or null', () => {
+    const service: AuthenticationService = TestBed.get(AuthenticationService);
+
+    if (localStorage.getItem(service.sessionName)) {
+      expect(service.getUser()).toEqual(jasmine.objectContaining({ firstName: '', lastName: '' }));
+    } else {
+      expect(service.getUser()).toBeNull();
+    }
+  });
 });

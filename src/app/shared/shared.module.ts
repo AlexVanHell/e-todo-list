@@ -7,9 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { SpinnerLoaderComponent } from './components/spinner-loader/spinner-loader.component';
 import { CustomDatePipe } from './pipes/custom-date/custom-date.pipe';
 import { SwitchComponent } from './components/switch/switch.component';
+import { ContainerWithTitleComponent } from './components/container-with-title/container-with-title.component';
+import { FileSizePipe } from './pipes/file-size/file-size.pipe';
 
 @NgModule({
-  declarations: [PasswordPreviewDirective, PasswordPreviewComponent, SpinnerLoaderComponent, CustomDatePipe, SwitchComponent],
+  declarations: [PasswordPreviewDirective, PasswordPreviewComponent, SpinnerLoaderComponent, CustomDatePipe, SwitchComponent, ContainerWithTitleComponent, FileSizePipe],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -21,7 +23,9 @@ import { SwitchComponent } from './components/switch/switch.component';
     FontAwesomeModule,
     SpinnerLoaderComponent,
     CustomDatePipe,
-    SwitchComponent
+    SwitchComponent,
+    ContainerWithTitleComponent,
+    FileSizePipe
   ]
 })
 export class SharedModule { }

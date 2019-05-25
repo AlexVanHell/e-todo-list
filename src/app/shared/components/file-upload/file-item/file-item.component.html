@@ -1,0 +1,64 @@
+<div class="row">
+  <ng-container
+    [ngTemplateOutlet]="
+      item.status === 'loading' ? loadingTemplate : loadedTemplate
+    "
+    [ngTemplateOutletContext]="{ $implicit: item }"
+  ></ng-container>
+</div>
+
+<ng-template #loadingTemplate let-item>
+  <div class="col-12">
+    <div class="file-info d-flex flex-row">
+      <div class="file-info-icon">
+        <span class="icon">
+          <fa-icon [icon]="'file'"></fa-icon>
+        </span>
+      </div>
+      <div class="file-info-text flex-grow-1">
+        <h5 class="m-0 pb-2">
+          Cargando...
+        </h5>
+        <div class="m-0">
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              [attr.aria-valuenow]="item.progress"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              [ngStyle]="{ width: item.progress + '%' }"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #loadedTemplate let-item>
+  <div class="col-12 col-md-8">
+    <div class="file-info d-flex flex-row">
+      <div class="file-info-icon">
+        <span class="icon">
+          <fa-icon [icon]="icon"></fa-icon>
+        </span>
+      </div>
+      <div class="file-info-text flex-grow-1" *ngIf="item.file">
+        <h5 class="m-0 pb-2">
+          {{ item.file.name || 'Archivo' }}
+        </h5>
+        <p class="m-0"><b>Tipo: </b>{{ item.file.type }}</p>
+        <p class="m-0">
+          {{ item.file.size || 0 | fileSize }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4 text-right">
+    <button class="btn btn-danger" (click)="onDeleteClick.emit(item)">
+      <fa-icon [icon]="'trash'" class="mr-2"></fa-icon>
+      Eliminar
+    </button>
+  </div>
+</ng-template>
