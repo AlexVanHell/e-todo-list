@@ -11,10 +11,12 @@ export class FileIconPipe implements PipeTransform {
    * @param value File name
    * @param args
    */
-  transform(value: string, args?: any): any {
+  transform(value: File, args: 'icon' | 'color' = 'icon'): any {
+    let fileExt: string = value.name.substring(value.name.lastIndexOf('.') + 1, value.name.length - 1);
+
     return (transformations.find(x => {
-      return x.fileTypes.indexOf(value) > -1 || x.fileExtension.indexOf(value) > -1;
-    }) || { icon: 'file' }).icon;
+      return x.fileTypes.indexOf(value.type) > -1 || x.fileExtensions.indexOf(fileExt) > -1;
+    }) || { [args]: args === 'icon' ? 'file' : '#616161' })[args];
   }
 
 }

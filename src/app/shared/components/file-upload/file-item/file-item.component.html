@@ -40,15 +40,18 @@
   <div class="col-12 col-md-8">
     <div class="file-info d-flex flex-row">
       <div class="file-info-icon">
-        <span class="icon">
-          <fa-icon [icon]="item.file.name | fileIcon"></fa-icon>
+        <span
+          class="icon"
+          [style.background-color]="item.file | fileIcon: 'color'"
+        >
+          <fa-icon [icon]="item.file | fileIcon"></fa-icon>
         </span>
       </div>
       <div class="file-info-text flex-grow-1" *ngIf="item.file">
         <h5 class="m-0 pb-2">
           {{ item.file.name || 'Archivo' }}
         </h5>
-        <p class="m-0"><b>Tipo: </b>{{ item.file.type | fileType }}</p>
+        <p class="m-0"><b>Tipo: </b>{{ item.file | fileType }}</p>
         <p class="m-0">
           {{ item.file.size || 0 | fileSize }}
         </p>

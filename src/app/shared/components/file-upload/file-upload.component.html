@@ -1,16 +1,16 @@
 <div>
-  <app-drop-block [length]="list.length"></app-drop-block>
-</div>
-
-<div class="list-group">
-  <div
-    class="list-group-item"
-    *ngFor="let item of list; let i = index"
-    @deleteSlide
-  >
-    <app-file-item
-      [item]="item"
-      (onDeleteClick)="deleteItem(i)"
-    ></app-file-item>
-  </div>
+  <app-drop-block [length]="list.length">
+    <div class="list-group">
+      <div
+        class="list-group-item"
+        *ngFor="let item of list; let i = index"
+        @deleteSlide
+      >
+        <app-file-item
+          [item]="item"
+          (onDeleteClick)="deleteItem(i)"
+        ></app-file-item>
+      </div>
+    </div>
+  </app-drop-block>
 </div>

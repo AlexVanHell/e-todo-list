@@ -1,36 +1,48 @@
 <div
   class="drop-block"
   (dragover)="dragover($event)"
-  (dragend)="dragend($event)"
-  (dragleave)="dragend($event)"
+  (dragleave)="dragleave($event)"
   (drop)="drop($event)"
 >
-  <div class="drop-in" [class.active]="status === 'dragging'">
-    <div class="title text-center">
-      <span class="icon">
-        <fa-icon [icon]="'upload'"></fa-icon>
-      </span>
-      <h4 class="text-muted py-3">
-        <ng-container
-          *ngIf="status === 'dragging'; then thenTemplate; else elseTemplate"
-        ></ng-container>
-        <ng-template #thenTemplate>
-          Suelta los archivos hdtpm
-        </ng-template>
-        <ng-template #elseTemplate>
-          Arrastra y suelta tus archivos aqui prro :v
-        </ng-template>
-      </h4>
-      <button class="btn btn-primary" (click)="triggerInput(input)">
-        Subir un archivo
-      </button>
-      <input
-        type="file"
-        class="d-none"
-        #input
-        (change)="handleFiles($event)"
-        multiple
-      />
+  <div
+    class="drop-in"
+    [class.active]="status === 'dragging'"
+    [class.no-border]="status === 'none' && length"
+  >
+    <div
+      class="title-container"
+      [class.active]="status === 'dragging' && length"
+      [hidden]="length && status === 'none'"
+    >
+      <div class="title text-center">
+        <span class="icon">
+          <fa-icon [icon]="'upload'"></fa-icon>
+        </span>
+        <h4 class="text-muted py-3">
+          <ng-container
+            *ngIf="status === 'dragging'; then thenTemplate; else elseTemplate"
+          ></ng-container>
+          <ng-template #thenTemplate>
+            Suelta los archivos hdtpm
+          </ng-template>
+          <ng-template #elseTemplate>
+            Arrastra y suelta tus archivos aqui prro :v
+          </ng-template>
+        </h4>
+        <button class="btn btn-primary" (click)="triggerInput(input)">
+          Subir un archivo
+        </button>
+        <input
+          type="file"
+          class="d-none"
+          #input
+          (change)="handleFiles($event)"
+          multiple
+        />
+      </div>
+    </div>
+    <div class="files-container">
+      <ng-content></ng-content>
     </div>
   </div>
 </div>

@@ -8,7 +8,7 @@ import { FileUploadService } from '../service/file-upload.service';
 })
 export class DropBlockComponent implements OnInit {
   @Output() onFiles: EventEmitter<File>;
-  status: 'none' | 'dragging' = 'none';
+  status: 'none' | 'dragging' | 'leave' = 'none';
   @Input() length: number = 0;
 
   constructor(
@@ -33,9 +33,9 @@ export class DropBlockComponent implements OnInit {
     this.status = 'dragging';
   }
 
-  dragend($event: Event): void {
-    this.status = 'none';
-    //console.log($event);
+  dragleave($event: Event): void {
+    $event.preventDefault();
+    this.status = 'leave';
   }
 
   drop($event: Event): void {
