@@ -6,9 +6,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '../../shared.module';
 import { DropBlockComponent } from './drop-block/drop-block.component';
 import { FileUploadService } from './service/file-upload.service';
+import { FileIconPipe } from './pipes/file-icon/file-icon.pipe';
+import { FileTypePipe } from './pipes/file-type/file-type.pipe';
 
 @NgModule({
-  declarations: [FileUploadComponent, FileItemComponent, DropBlockComponent],
+  declarations: [FileUploadComponent, FileItemComponent, DropBlockComponent, FileIconPipe, FileTypePipe],
   imports: [
     CommonModule,
     FontAwesomeModule,
