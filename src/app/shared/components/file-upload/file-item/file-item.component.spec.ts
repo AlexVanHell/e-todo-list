@@ -52,9 +52,9 @@ describe('FileItemComponent', () => {
 
   it('should render item.name when item.name is truthy', () => {
     const titleElem = compiled.querySelector('h5');
-    component.item = { name: 'Nombre archivo' };
+    component.item = { };
     fixture.detectChanges();
 
-    expect(titleElem.textContent.trim()).toBe(component.item.name);
+    expect(titleElem.textContent.trim()).toBe(component.item.file.name);
   });
 });
